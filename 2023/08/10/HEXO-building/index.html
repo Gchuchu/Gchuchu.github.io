@@ -14,7 +14,7 @@
 <meta property="og:description" content="hexo d出现问题解析2021年8月之后github不再支持使用用户名和密码来推送，所以只能改成其他方式 这里我选用的是Token，而不是SSH。 Token方法创建个人Token个人github主页-&gt;settings-&gt;Developer Settings-&gt;Personal access tokens-&gt;Token(classic)-&gt;Generate new">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-10T06:23:26.000Z">
-<meta property="article:modified_time" content="2023-08-10T07:30:51.623Z">
+<meta property="article:modified_time" content="2023-08-10T07:48:03.492Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="HEXO">
 <meta name="twitter:card" content="summary">
@@ -381,7 +381,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2023-08-10 15:30:51'>2023-08-10 14:23</time>
+            Created At : <time class="date" title='Updated At: 2023-08-10 15:48:03'>2023-08-10 14:23</time>
         
     </div>
     <div class="article-meta">
@@ -425,7 +425,10 @@
 <p>repo部分更新为<br><code>repo: https://&lt;token&gt;@github.com/&lt;username&gt;/&lt;username&gt;.github.io.git</code></p>
 <p><strong>问题喜+1：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: RPC failed; HTTP 408 curl 22 The requested URL returned error: 408</span><br><span class="line">send-pack: unexpected disconnect while reading sideband packet</span><br><span class="line">fatal: the remote end hung up unexpectedly</span><br></pre></td></tr></table></figure>
-<p>Don’t worry! Just without magic.[关魔法重新hexo d]</p>
+<p>Don’t worry! Just without magic.[关魔法重新hexo d]<br><strong>问题喜+2:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to connect to github.com port 443 after 21094 ms: Couldn&#x27;t connect to server</span><br></pre></td></tr></table></figure>
+<p>Don’t worry! Just open the magic.[开魔法重新hexo d]</p>
+<p>暂时还没遇见过两个问题都出现的情况。也许换个变化系魔法有用。</p>
 <p>Hopefully help you!</p>
 
       
