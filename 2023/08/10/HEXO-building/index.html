@@ -6,15 +6,15 @@
   
   <title>HEXO_building | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="this is not using anywhere now!">
+  <meta name="description" content="this is not using anywhere now! hexo d出现问题解析2021年8月之后github不再支持使用用户名和密码来推送，所以只能改成其他方式 这里我选用的是Token，而不是SSH。 Token方法创建个人Token个人github主页-&gt;settings-&gt;Developer Settings-&gt;Personal access tokens-&amp;gt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HEXO_building">
 <meta property="og:url" content="http://example.com/2023/08/10/HEXO-building/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="this is not using anywhere now!">
+<meta property="og:description" content="this is not using anywhere now! hexo d出现问题解析2021年8月之后github不再支持使用用户名和密码来推送，所以只能改成其他方式 这里我选用的是Token，而不是SSH。 Token方法创建个人Token个人github主页-&gt;settings-&gt;Developer Settings-&gt;Personal access tokens-&amp;gt">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-10T06:23:26.000Z">
-<meta property="article:modified_time" content="2023-08-10T06:25:32.729Z">
+<meta property="article:modified_time" content="2023-08-10T07:18:53.919Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="HEXO">
 <meta name="twitter:card" content="summary">
@@ -99,11 +99,18 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>this is not using anywhere now!</p>
+<h2 id="hexo-d出现问题解析"><a href="#hexo-d出现问题解析" class="headerlink" title="hexo d出现问题解析"></a>hexo d出现问题解析</h2><p>2021年8月之后github不再支持使用用户名和密码来推送，所以只能改成其他方式</p>
+<p>这里我选用的是Token，而不是SSH。</p>
+<h3 id="Token方法"><a href="#Token方法" class="headerlink" title="Token方法"></a>Token方法</h3><p>创建个人Token<br>个人github主页-&gt;settings-&gt;Developer Settings-&gt;Personal access tokens-&gt;Token(classic)-&gt;<br>Generate new token-&gt;将选项都打上对勾-&gt;generate-&gt;将Token记录</p>
+<p>repo部分更新为<br><code>repo: https://&lt;token&gt;@github.com/&lt;username&gt;/&lt;username&gt;.github.io.git</code></p>
+<p><strong>问题喜+1：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: RPC failed; HTTP 408 curl 22 The requested URL returned error: 408</span><br><span class="line">send-pack: unexpected disconnect while reading sideband packet</span><br><span class="line">fatal: the remote end hung up unexpectedly</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/10/HEXO-building/" data-id="cll4s13fl0000z4wbd0of2pna" data-title="HEXO_building" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/08/10/HEXO-building/" data-id="cll4tzxr00000ggwbhcuq9l5s" data-title="HEXO_building" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
