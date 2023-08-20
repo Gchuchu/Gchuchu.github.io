@@ -16,9 +16,9 @@
 <meta property="og:description" content="Qemu主事件循环机制分析背景：为了定制Qemu，跟踪Qemu，捕获对磁盘的访问并分析磁盘的访问原理，我们决定分析Qemu。从最开始的捕获磁盘fd，到跟踪fd的使用情况，到主事件循环机制的发现，到Kvm与Qemu的交互，到磁盘处理函数的注册，到最终磁盘访问的定位。无论只是为了解决问题，还是为了深究Qemu机制，总之我们完成了目标，遂完成此篇文章，即使对自己的反思，又希望对需要了解Qemu的同学们一">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/08/10/Qemu&kvm%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D">
-<meta property="og:image" content="http://example.com/img/qemu/xiecheng.png">
+<meta property="og:image" content="http://example.com/img/Qemu/xiecheng.png">
 <meta property="article:published_time" content="2023-08-13T08:47:06.000Z">
-<meta property="article:modified_time" content="2023-08-20T13:49:11.217Z">
+<meta property="article:modified_time" content="2023-08-20T14:18:59.890Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Qemu">
 <meta name="twitter:card" content="summary">
@@ -183,7 +183,7 @@
 <h4 id="与线程的关系"><a href="#与线程的关系" class="headerlink" title="与线程的关系"></a>与线程的关系</h4><p>一般情况下，线程同样运用在多任务处理中，但是<code>协程的切换是在用户态的</code>(程序自身实现的)，<code>线程的切换是在内核态的</code>，所以开销更小，当处理量极大且单体任务量较小时用协程会很方便。</p>
 <h4 id="与函数调用的关系"><a href="#与函数调用的关系" class="headerlink" title="与函数调用的关系"></a>与函数调用的关系</h4><p>普通函数调用会建立堆栈，并且函数结束后函数中处理的任何中间信息全部丢掉，但是协程不同。<br>协程可以记录函数上下文信息，将处理的中间信息存储下来，当再次切换到协程时，可以即刻读取上次中断处继续向下执行，且不用像函数调用那样重新压栈。<br>这里可能会涉及到<code>有栈协程</code>和<code>无栈协程</code>的知识点。如有兴趣，请自行查阅。</p>
 <h4 id="协程的并发性"><a href="#协程的并发性" class="headerlink" title="协程的并发性"></a>协程的并发性</h4><p>编写协程时，既然是在用户态切换的，又怎么完成像线程一样的并发？<br>其实协程并不是并行的，线程可以运行在多核中从而实现并行。协程是协作式多任务处理，当等待时，会<code>显式地</code>将控制权交给其他协程，所以，更适用于处理<code>与IO绑定的任务</code>，如Web请求或处理图形用户界面中的用户交互。</p>
-<h4 id="用setjmp和longjmp简单实现协程"><a href="#用setjmp和longjmp简单实现协程" class="headerlink" title="用setjmp和longjmp简单实现协程"></a>用setjmp和longjmp简单实现协程</h4><p><code>setjmp(env)</code>用来记录当前上下文(调用堆栈)，并返回0<br><code>longjmp(env,action)</code>用来跳转到同一env对应的setjmp运行后的下一条语句，但是会返回action。<br><code>env</code>用来记录上下文。<br>一般情况下这两个函数一般是成套使用的，用来实现C语言中的异常处理<br>用一个例子来说明这两个函数的关系<br><img src="/img/qemu/xiecheng.png" alt="Alt text"><br>程序开始运行，setjmp记录上下文，res记录返回值，此时res&#x3D;0,执行my_func的部分,因为b此时为0，所以会运行longjmp，当运行到longjmp(env,1)时，程序会返回到同一env的setjmp的下一条语句，即此时主函数中的if语句，但是因为此时ret是longjmp中设置的1，所以走else路线，<br><code>Return from longjmp:1\n</code>。<br>此例子参考知乎：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82492121">setjmp是怎么工作的 - 知乎 (zhihu.com)</a></p>
+<h4 id="用setjmp和longjmp简单实现协程"><a href="#用setjmp和longjmp简单实现协程" class="headerlink" title="用setjmp和longjmp简单实现协程"></a>用setjmp和longjmp简单实现协程</h4><p><code>setjmp(env)</code>用来记录当前上下文(调用堆栈)，并返回0<br><code>longjmp(env,action)</code>用来跳转到同一env对应的setjmp运行后的下一条语句，但是会返回action。<br><code>env</code>用来记录上下文。<br>一般情况下这两个函数一般是成套使用的，用来实现C语言中的异常处理<br>用一个例子来说明这两个函数的关系<br><img src="/img/Qemu/xiecheng.png" alt="Alt text"><br>程序开始运行，setjmp记录上下文，res记录返回值，此时res&#x3D;0,执行my_func的部分,因为b此时为0，所以会运行longjmp，当运行到longjmp(env,1)时，程序会返回到同一env的setjmp的下一条语句，即此时主函数中的if语句，但是因为此时ret是longjmp中设置的1，所以走else路线，<br><code>Return from longjmp:1\n</code>。<br>此例子参考知乎：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82492121">setjmp是怎么工作的 - 知乎 (zhihu.com)</a></p>
 <h2 id="主事件循环流程"><a href="#主事件循环流程" class="headerlink" title="主事件循环流程"></a>主事件循环流程</h2><h3 id><a href="#" class="headerlink" title></a></h3><h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><p>感谢李老师一直以来的悉心指导，同实验室的各位朋友们和我校的良好氛围。</p>
 <hr>
 <p><code>望你能够坚守本心</code><br><code>如需转载，请附上作者连接</code></p>
