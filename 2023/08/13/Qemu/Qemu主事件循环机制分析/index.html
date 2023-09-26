@@ -6,21 +6,20 @@
   <meta name="keywords" content=" Qemu ">
   <meta name="description" content="Qemu主事件循环机制分析 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="chsrc全平台换源开源项目此开源项目是为了给已经存在的许多软件进行换源。欢迎您参与维护你所熟悉的部分软件的换源。本软件为自由软件，GPLv3 许可证的采用将有机会使您的贡献被更广泛地使用。 本篇教程希望大家能够使用此项目,如果可以能够参与维护此项目。项目gitee源地址,项目github源地址. 使用教程共有两种使用方式，一种是直接使用脚本进行使用，一种是源码下载并编译运行。 直接使用脚本使用W">
+<meta name="description" content="title: chsrc全平台换源开源项目date: 2023-09-26 20:25:12tags: Projectcategory: Project  chsrc全平台换源开源项目此开源项目是为了给已经存在的许多软件进行换源。欢迎您参与维护你所熟悉的部分软件的换源。本软件为自由软件，GPLv3 许可证的采用将有机会使您的贡献被更广泛地使用。   本篇教程希望大家能够使用此项目,如果可以能够参">
 <meta property="og:type" content="article">
-<meta property="og:title" content="chsrc全平台换源开源项目">
+<meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/2023/09/26/chsrc%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8D%A2%E6%BA%90%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/chsrc%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8D%A2%E6%BA%90%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="chsrc全平台换源开源项目此开源项目是为了给已经存在的许多软件进行换源。欢迎您参与维护你所熟悉的部分软件的换源。本软件为自由软件，GPLv3 许可证的采用将有机会使您的贡献被更广泛地使用。 本篇教程希望大家能够使用此项目,如果可以能够参与维护此项目。项目gitee源地址,项目github源地址. 使用教程共有两种使用方式，一种是直接使用脚本进行使用，一种是源码下载并编译运行。 直接使用脚本使用W">
+<meta property="og:description" content="title: chsrc全平台换源开源项目date: 2023-09-26 20:25:12tags: Projectcategory: Project  chsrc全平台换源开源项目此开源项目是为了给已经存在的许多软件进行换源。欢迎您参与维护你所熟悉的部分软件的换源。本软件为自由软件，GPLv3 许可证的采用将有机会使您的贡献被更广泛地使用。   本篇教程希望大家能够使用此项目,如果可以能够参">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/Gchuchu/blog_Gchuchu-img/img/20230926204931.png">
-<meta property="og:image" content="https://github.com/Gchuchu/blog_Gchuchu-img/img/20230926205630.png">
-<meta property="article:published_time" content="2023-09-26T12:25:12.000Z">
-<meta property="article:modified_time" content="2023-09-26T12:59:26.085Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Gchuchu/blog_Gchuchu-img@main/img/20230926211711.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Gchuchu/blog_Gchuchu-img@main/img/20230926211613.png">
+<meta property="article:published_time" content="2023-09-26T12:25:12.404Z">
+<meta property="article:modified_time" content="2023-09-26T13:25:29.010Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Project">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/Gchuchu/blog_Gchuchu-img/img/20230926204931.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Gchuchu/blog_Gchuchu-img@main/img/20230926211711.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -173,21 +172,6 @@
             
                 
     <li>
-        <div data-rel="Project">
-            
-            Project
-            <small>(1)</small>
-        </div>
-        
-    </li>
-
-            
-        
-    
-        
-            
-                
-    <li>
         <div data-rel="Qemu">
             
             Qemu
@@ -267,10 +251,6 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Project</a>
-            </li>
-        
-            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>Qemu</a>
             </li>
         
@@ -282,11 +262,11 @@
     <nav id="title-list-nav">
         
         
-        <a  class="All Project "
+        <a  class="All "
            href="/2023/09/26/chsrc%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8D%A2%E6%BA%90%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/chsrc%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8D%A2%E6%BA%90%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"
-           data-tag="Project"
+           data-tag=""
            data-author="" >
-            <span class="post-title" title="chsrc全平台换源开源项目">chsrc全平台换源开源项目</span>
+            <span class="post-title" title=""></span>
             <span class="post-date" title="2023-09-26 20:25:12">2023/09/26</span>
         </a>
         
@@ -389,7 +369,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2023-09-24 17:18:26'>2023-08-13 16:47</time>
+            Created At : <time class="date" title='Updated At: 2023-09-26 21:20:08'>2023-08-13 16:47</time>
         
     </div>
     <div class="article-meta">
@@ -453,7 +433,7 @@
 <h4 id="1-2-1-与线程的关系"><a href="#1-2-1-与线程的关系" class="headerlink" title="1.2.1. 与线程的关系"></a>1.2.1. 与线程的关系</h4><p>一般情况下，线程同样运用在多任务处理中，但是<code>协程的切换是在用户态的</code>(程序自身实现的)，<code>线程的切换是在内核态的</code>，所以开销更小，当处理量极大且单体任务量较小时用协程会很方便。  </p>
 <h4 id="1-2-2-与函数调用的关系"><a href="#1-2-2-与函数调用的关系" class="headerlink" title="1.2.2. 与函数调用的关系"></a>1.2.2. 与函数调用的关系</h4><p>普通函数调用会建立堆栈，并且函数结束后函数中处理的任何中间信息全部丢掉，但是协程不同。<br>协程可以记录函数上下文信息，将处理的中间信息存储下来，当再次切换到协程时，可以即刻读取上次中断处继续向下执行，且不用像函数调用那样重新压栈。<br>这里可能会涉及到<code>有栈协程</code>和<code>无栈协程</code>的知识点。如有兴趣，请自行查阅。  </p>
 <h4 id="1-2-3-协程的并发性"><a href="#1-2-3-协程的并发性" class="headerlink" title="1.2.3. 协程的并发性"></a>1.2.3. 协程的并发性</h4><p>编写协程时，既然是在用户态切换的，又怎么完成像线程一样的并发？<br>其实协程并不是并行的，线程可以运行在多核中从而实现并行。协程是协作式多任务处理，当等待时，会<code>显式地</code>将控制权交给其他协程，所以，更适用于处理<code>与IO绑定的任务</code>，如Web请求或处理图形用户界面中的用户交互。  </p>
-<h4 id="1-2-4-用setjmp和longjmp简单实现协程"><a href="#1-2-4-用setjmp和longjmp简单实现协程" class="headerlink" title="1.2.4. 用setjmp和longjmp简单实现协程"></a>1.2.4. 用setjmp和longjmp简单实现协程</h4><p><code>setjmp(env)</code>用来记录当前上下文(调用堆栈)，并返回0<br><code>longjmp(env,action)</code>用来跳转到同一env对应的setjmp运行后的下一条语句，但是会返回action。<br><code>env</code>用来记录上下文。<br>一般情况下这两个函数一般是成套使用的，用来实现C语言中的异常处理<br>用一个例子来说明这两个函数的关系<br><img src="https://github.com/Gchuchu/blog_Gchuchu-img.git/img/20230924165238.png" alt="20230924165238"><br>程序开始运行，setjmp记录上下文，res记录返回值，此时res&#x3D;0,执行my_func的部分,因为b此时为0，所以会运行longjmp，当运行到longjmp(env,1)时，程序会返回到同一env的setjmp的下一条语句，即此时主函数中的if语句，但是因为此时ret是longjmp中设置的1，所以走else路线，<br><code>Return from longjmp:1\n</code>。<br>此例子参考知乎：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82492121">setjmp是怎么工作的 - 知乎 (zhihu.com)</a>  </p>
+<h4 id="1-2-4-用setjmp和longjmp简单实现协程"><a href="#1-2-4-用setjmp和longjmp简单实现协程" class="headerlink" title="1.2.4. 用setjmp和longjmp简单实现协程"></a>1.2.4. 用setjmp和longjmp简单实现协程</h4><p><code>setjmp(env)</code>用来记录当前上下文(调用堆栈)，并返回0<br><code>longjmp(env,action)</code>用来跳转到同一env对应的setjmp运行后的下一条语句，但是会返回action。<br><code>env</code>用来记录上下文。<br>一般情况下这两个函数一般是成套使用的，用来实现C语言中的异常处理<br>用一个例子来说明这两个函数的关系<br><img src="https://cdn.jsdelivr.net/gh/Gchuchu/blog_Gchuchu-img@main/img/20230924165238.png" alt="协程例子"><br>程序开始运行，setjmp记录上下文，res记录返回值，此时res&#x3D;0,执行my_func的部分,因为b此时为0，所以会运行longjmp，当运行到longjmp(env,1)时，程序会返回到同一env的setjmp的下一条语句，即此时主函数中的if语句，但是因为此时ret是longjmp中设置的1，所以走else路线，<br><code>Return from longjmp:1\n</code>。<br>此例子参考知乎：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82492121">setjmp是怎么工作的 - 知乎 (zhihu.com)</a>  </p>
 <h2 id="2-主事件循环流程"><a href="#2-主事件循环流程" class="headerlink" title="2. 主事件循环流程"></a>2. 主事件循环流程</h2><h3 id><a href="#" class="headerlink" title></a></h3><h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><p>感谢李老师一直以来的悉心指导，同实验室的各位朋友们和我校的良好氛围。  </p>
 
       
