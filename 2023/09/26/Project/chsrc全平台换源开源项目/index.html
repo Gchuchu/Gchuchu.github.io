@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Qemu主事件循环机制分析 | Hexo</title>
-  <meta name="keywords" content=" Qemu ">
-  <meta name="description" content="Qemu主事件循环机制分析 | Hexo">
+  <title>chsrc全平台换源开源项目 | Hexo</title>
+  <meta name="keywords" content=" Project ">
+  <meta name="description" content="chsrc全平台换源开源项目 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="chsrc全平台换源开源项目此开源项目是为了给已经存在的许多软件进行换源。欢迎您参与维护你所熟悉的部分软件的换源。本软件为自由软件，GPLv3 许可证的采用将有机会使您的贡献被更广泛地使用。   本篇教程希望大家能够使用此项目,如果可以能够参与维护此项目。项目gitee源地址,项目github源地址.   1. 使用教程共有两种使用方式，一种是直接使用脚本进行使用，一种是源码下载并编译运行。">
 <meta property="og:type" content="article">
@@ -362,9 +362,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Qemu/Qemu主事件循环机制分析" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Project/chsrc全平台换源开源项目" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Qemu主事件循环机制分析</h1>
+        <h1 class="article-title">chsrc全平台换源开源项目</h1>
     
     <div class="article-meta">
         
@@ -374,7 +374,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="Qemu">Qemu</a>
+            <a  data-rel="Project">Project</a>
             
         </span>
         
@@ -382,19 +382,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color5">Qemu</a>
+            <a class="color3">Project</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2023-09-26 21:20:08'>2023-08-13 16:47</time>
+            Created At : <time class="date" title='Updated At: 2023-09-26 21:30:20'>2023-09-26 20:25</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:1.2k</span>
+        <span>Count:405</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -424,7 +424,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Qemu%E4%B8%BB%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E5%88%86%E6%9E%90"><span class="toc-text">Qemu主事件循环机制分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-text">1. 前置知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-glib%E5%BA%93%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6"><span class="toc-text">1.1. glib库中的事件循环机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-GMainLoop-GMainContext-GSource-fd%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">1.1.1. GMainLoop,GMainContext,GSource,fd的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">1.1.2. 事件循环的过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-C%E5%8D%8F%E7%A8%8B"><span class="toc-text">1.2. C协程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">1.2.1. 与线程的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-%E4%B8%8E%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">1.2.2. 与函数调用的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-3-%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E6%80%A7"><span class="toc-text">1.2.3. 协程的并发性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-4-%E7%94%A8setjmp%E5%92%8Clongjmp%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E5%8D%8F%E7%A8%8B"><span class="toc-text">1.2.4. 用setjmp和longjmp简单实现协程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%BB%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%B5%81%E7%A8%8B"><span class="toc-text">2. 主事件循环流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%B8%A3%E8%B0%A2"><span class="toc-text">鸣谢</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#chsrc%E5%85%A8%E5%B9%B3%E5%8F%B0%E6%8D%A2%E6%BA%90%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span class="toc-text">chsrc全平台换源开源项目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">1. 使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">1.1. 直接使用脚本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%90%8E%E4%BD%BF%E7%94%A8"><span class="toc-text">1.2. 源码编译后使用</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -440,21 +440,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Qemu主事件循环机制分析"><a href="#Qemu主事件循环机制分析" class="headerlink" title="Qemu主事件循环机制分析"></a>Qemu主事件循环机制分析</h1><p>背景：为了定制Qemu，跟踪Qemu，捕获对磁盘的访问并分析磁盘的访问原理，我们决定分析Qemu。从最开始的捕获磁盘fd，到跟踪fd的使用情况，到主事件循环机制的发现，到Kvm与Qemu的交互，到磁盘处理函数的注册，到最终磁盘访问的定位。无论只是为了解决问题，还是为了深究Qemu机制，总之我们完成了目标，遂完成此系列文章，即是对自己的反思，又希望对需要了解Qemu的同学们一点帮助。<br>本文主要分析Qemu主事件循环机制，如果您还不了解Qemu，请移步<a href="/2023/08/10/Qemu&kvm%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D">Qemu&amp;Kvm简单介绍</a>  </p>
-<h2 id="1-前置知识"><a href="#1-前置知识" class="headerlink" title="1. 前置知识"></a>1. 前置知识</h2><p>前置知识较为繁杂，其中包含glib库的部分内容，C语言中协程的相关内容，这几个前置知识我只是引出需要了解的内容，他们每个都是值得深深研究的课题，感兴趣的同学可以去研究研究。  </p>
-<h3 id="1-1-glib库中的事件循环机制"><a href="#1-1-glib库中的事件循环机制" class="headerlink" title="1.1. glib库中的事件循环机制"></a>1.1. glib库中的事件循环机制</h3><p>glib库是一个跨平台的，用C语言编写的若干底层库的集合，qemu的事件循环机制是基于glib实现的。<br>事件循环一般是这样进行的：  </p>
-<ol>
-<li>创建要循环监听的容器  </li>
-<li>往这个容器中添加事件源  </li>
-<li>主循环一直监听<br>当事件源有读事件或者写事件时，<br>主循环创建一个线程去处理这个事件，继续监听等待下一个事件的到来。<br>首先我们要了解GMainLoop,GMainContext,GSource,fd这几个结构之间的关系。<br>之后我们要知道glib一般是如何进行事件循环的</li>
-</ol>
-<h4 id="1-1-1-GMainLoop-GMainContext-GSource-fd的关系"><a href="#1-1-1-GMainLoop-GMainContext-GSource-fd的关系" class="headerlink" title="1.1.1. GMainLoop,GMainContext,GSource,fd的关系"></a>1.1.1. GMainLoop,GMainContext,GSource,fd的关系</h4><p>GMainLoop是glib中代表事件循环的结构，每一个线程只有一个GMainLoop。<br>GMainContext是一个在主循环中代表事件源集合的结构。事件源可以在不同的线程中添加进GMainContext，或从中删除。  </p>
-<h4 id="1-1-2-事件循环的过程"><a href="#1-1-2-事件循环的过程" class="headerlink" title="1.1.2. 事件循环的过程"></a>1.1.2. 事件循环的过程</h4><h3 id="1-2-C协程"><a href="#1-2-C协程" class="headerlink" title="1.2. C协程"></a>1.2. C协程</h3><p>协程是一种与其他协程或子程序交叉运行的程序，协程也会返回(通常为<code>yield</code>，也就是切换，而不是直接<code>return</code>)，执行返回语句后，会交出控制权，return时会彻底结束。  </p>
-<h4 id="1-2-1-与线程的关系"><a href="#1-2-1-与线程的关系" class="headerlink" title="1.2.1. 与线程的关系"></a>1.2.1. 与线程的关系</h4><p>一般情况下，线程同样运用在多任务处理中，但是<code>协程的切换是在用户态的</code>(程序自身实现的)，<code>线程的切换是在内核态的</code>，所以开销更小，当处理量极大且单体任务量较小时用协程会很方便。  </p>
-<h4 id="1-2-2-与函数调用的关系"><a href="#1-2-2-与函数调用的关系" class="headerlink" title="1.2.2. 与函数调用的关系"></a>1.2.2. 与函数调用的关系</h4><p>普通函数调用会建立堆栈，并且函数结束后函数中处理的任何中间信息全部丢掉，但是协程不同。<br>协程可以记录函数上下文信息，将处理的中间信息存储下来，当再次切换到协程时，可以即刻读取上次中断处继续向下执行，且不用像函数调用那样重新压栈。<br>这里可能会涉及到<code>有栈协程</code>和<code>无栈协程</code>的知识点。如有兴趣，请自行查阅。  </p>
-<h4 id="1-2-3-协程的并发性"><a href="#1-2-3-协程的并发性" class="headerlink" title="1.2.3. 协程的并发性"></a>1.2.3. 协程的并发性</h4><p>编写协程时，既然是在用户态切换的，又怎么完成像线程一样的并发？<br>其实协程并不是并行的，线程可以运行在多核中从而实现并行。协程是协作式多任务处理，当等待时，会<code>显式地</code>将控制权交给其他协程，所以，更适用于处理<code>与IO绑定的任务</code>，如Web请求或处理图形用户界面中的用户交互。  </p>
-<h4 id="1-2-4-用setjmp和longjmp简单实现协程"><a href="#1-2-4-用setjmp和longjmp简单实现协程" class="headerlink" title="1.2.4. 用setjmp和longjmp简单实现协程"></a>1.2.4. 用setjmp和longjmp简单实现协程</h4><p><code>setjmp(env)</code>用来记录当前上下文(调用堆栈)，并返回0<br><code>longjmp(env,action)</code>用来跳转到同一env对应的setjmp运行后的下一条语句，但是会返回action。<br><code>env</code>用来记录上下文。<br>一般情况下这两个函数一般是成套使用的，用来实现C语言中的异常处理<br>用一个例子来说明这两个函数的关系<br><img src="https://cdn.jsdelivr.net/gh/Gchuchu/blog_Gchuchu-img@main/img/20230924165238.png" alt="协程例子"><br>程序开始运行，setjmp记录上下文，res记录返回值，此时res&#x3D;0,执行my_func的部分,因为b此时为0，所以会运行longjmp，当运行到longjmp(env,1)时，程序会返回到同一env的setjmp的下一条语句，即此时主函数中的if语句，但是因为此时ret是longjmp中设置的1，所以走else路线，<br><code>Return from longjmp:1\n</code>。<br>此例子参考知乎：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82492121">setjmp是怎么工作的 - 知乎 (zhihu.com)</a>  </p>
-<h2 id="2-主事件循环流程"><a href="#2-主事件循环流程" class="headerlink" title="2. 主事件循环流程"></a>2. 主事件循环流程</h2><h3 id><a href="#" class="headerlink" title></a></h3><h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><p>感谢李老师一直以来的悉心指导，同实验室的各位朋友们和我校的良好氛围。  </p>
+        <h1 id="chsrc全平台换源开源项目"><a href="#chsrc全平台换源开源项目" class="headerlink" title="chsrc全平台换源开源项目"></a>chsrc全平台换源开源项目</h1><p>此开源项目是为了给已经存在的许多软件进行换源。欢迎您参与维护你所熟悉的部分软件的换源。本软件为自由软件，GPLv3 许可证的采用将有机会使您的贡献被更广泛地使用。  </p>
+<p>本篇教程希望大家能够使用此项目,如果可以能够参与维护此项目。<a target="_blank" rel="noopener" href="https://gitee.com/RubyMetric/chsrc">项目gitee源地址</a>,<a target="_blank" rel="noopener" href="https://github.com/RubyMetric/chsrc">项目github源地址</a>.  </p>
+<h2 id="1-使用教程"><a href="#1-使用教程" class="headerlink" title="1. 使用教程"></a>1. 使用教程</h2><p>共有两种使用方式，一种是直接使用脚本进行使用，一种是源码下载并编译运行。  </p>
+<h3 id="1-1-直接使用脚本使用"><a href="#1-1-直接使用脚本使用" class="headerlink" title="1.1. 直接使用脚本使用"></a>1.1. 直接使用脚本使用</h3><p>Windows  </p>
+<pre><code># x64
+curl -L https://gitee.com/RubyMetric/chsrc/releases/download/preview/chsrc-x64-windows.exe -o chsrc.exe  
+
+# x86
+curl -L https://gitee.com/RubyMetric/chsrc/releases/download/preview/chsrc-x86-windows.exe -o chsrc.exe  
+</code></pre>
+<p>Linux  </p>
+<pre><code># x64
+curl -L https://gitee.com/RubyMetric/chsrc/releases/download/preview/chsrc-x64-linux -o chsrc; chmod +x ./chsrc  
+
+# aarch64
+curl -L https://gitee.com/RubyMetric/chsrc/releases/download/preview/chsrc-aarch64-linux -o chsrc; chmod +x ./chsrc  
+
+# riscv64
+curl -L https://gitee.com/RubyMetric/chsrc/releases/download/preview/chsrc-riscv64-linux -o chsrc; chmod +x ./chsrc  
+
+# armv7
+curl -L https://gitee.com/RubyMetric/chsrc/releases/download/preview/chsrc-armv7-linux -o chsrc; chmod +x ./chsrc  
+</code></pre>
+<p>macOS  </p>
+<pre><code># x64
+curl -L https://gitee.com/RubyMetric/chsrc/releases/download/preview/chsrc-x64-macos -o chsrc; chmod +x ./chsrc  
+</code></pre>
+<h3 id="1-2-源码编译后使用"><a href="#1-2-源码编译后使用" class="headerlink" title="1.2. 源码编译后使用"></a>1.2. 源码编译后使用</h3><pre><code class="bash">git clone https://gitee.com/RubyMetric/chsrc.git  
+cd chsrc  
+make  
+
+# 如果你想要换操作系统的源
+# 如果你是ubuntu系统  
+./chsrc set ubuntu  
+# 如果你是centos系统  
+./chsrc set centos  
+# 如果你是deepin系统  
+./chsrc set deepin  
+</code></pre>
+<p>源码下载及编译<br><img src="https://cdn.jsdelivr.net/gh/Gchuchu/blog_Gchuchu-img@main/img/20230926211711.png" alt="源码下载及编译"><br>运行效果<br><img src="https://cdn.jsdelivr.net/gh/Gchuchu/blog_Gchuchu-img@main/img/20230926211613.png" alt="运行效果">  </p>
+<p>更多使用方法欢迎参见项目仓库README文档<br><a target="_blank" rel="noopener" href="https://gitee.com/RubyMetric/chsrc">项目gitee源地址</a>,<a target="_blank" rel="noopener" href="https://github.com/RubyMetric/chsrc">项目github源地址</a>.  </p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2085471348@qq.com </span>
